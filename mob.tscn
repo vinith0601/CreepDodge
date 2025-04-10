@@ -45,22 +45,24 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_eqsov"]
-radius = 46.0
-height = 98.0
+radius = 64.0
+height = 140.0
 
 [node name="Mob" type="RigidBody2D" groups=["mobs"]]
+position = Vector2(18, 10)
+scale = Vector2(0.5, 0.5)
 collision_mask = 0
 gravity_scale = 0.0
 script = ExtResource("1_1qmh0")
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(76, 68)
+scale = Vector2(1.37121, 1.4375)
 sprite_frames = SubResource("SpriteFrames_yscv0")
-animation = &"walk"
-frame_progress = 0.849933
+animation = &"swim"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 0)
+position = Vector2(102, 68)
 shape = SubResource("CapsuleShape2D_eqsov")
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="."]

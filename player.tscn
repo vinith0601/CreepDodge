@@ -48,4 +48,13 @@ animation = &"up"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_b26j0")
 
+[node name="BoostCoolDownTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="BoostTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="timeout" from="BoostCoolDownTimer" to="." method="OnBoostCoolDownTimerTimeout"]
+[connection signal="timeout" from="BoostTimer" to="." method="OnBoostTimerTimeout"]

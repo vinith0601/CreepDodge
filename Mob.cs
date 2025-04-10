@@ -18,5 +18,6 @@ public partial class Mob : RigidBody2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		LinearVelocity = LinearVelocity * 1.0001f;
 	}
 }

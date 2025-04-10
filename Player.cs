@@ -6,8 +6,11 @@ public partial class Player : Area2D
 	[Signal]
 	public delegate void HitEventHandler();
 
+	public int intialSpeed = 400;
 	[Export]
 	public int Speed = 400;
+	[Export]
+	public bool _IsBoostOnCooldown = false;
 
 	public Vector2 ScreenSize;
 
@@ -35,6 +38,20 @@ public partial class Player : Area2D
 		if (Input.IsActionPressed("move_up"))
 		{
 			velocity.Y -= 1;
+		}
+		if (Input.IsActionJustPressed("boost"))
+		{
+			if (!_IsBoostOnCooldown)
+			{
+				GD.Print("Boost activated");
+				Speed = (int)(Speed * 1.3);
+				_IsBoostOnCooldown = true;
+				GetNode<Timer>("BoostTimer").Start();
+				GetNode<Timer>("BoostCoolDownTimer").Start();
+			} else {
+				GD.Print("Boost on cooldown");
+			}
+
 		}
 
 		var animatedSprite = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
@@ -77,5 +94,15 @@ public partial class Player : Area2D
 		Position = position;
 		Show();
 		GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+	}
+	private void OnBoostTimerTimeout()
+	{
+		Speed = 400;
+		GD.Print("Boost deactivated");
+	}
+	private void OnBoostCoolDownTimerTimeout()
+	{
+		GD.Print("Boost cooldown finished");
+		_IsBoostOnCooldown = false;
 	}
 }
